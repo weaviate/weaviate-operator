@@ -1,23 +1,27 @@
-# permissions for end users to view clusters.
+# permissions for end users to edit weaviateclusters.
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   labels:
     app.kubernetes.io/name: weaviate-operator
     app.kubernetes.io/managed-by: kustomize
-  name: cluster-viewer-role
+  name: weaviatecluster-editor-role
 rules:
 - apiGroups:
   - apps.weaviate.io
   resources:
-  - clusters
+  - weaviateclusters
   verbs:
+  - create
+  - delete
   - get
   - list
+  - patch
+  - update
   - watch
 - apiGroups:
   - apps.weaviate.io
   resources:
-  - clusters/status
+  - weaviateclusters/status
   verbs:
   - get

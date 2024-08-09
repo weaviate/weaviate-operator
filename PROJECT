@@ -15,6 +15,6 @@ resources:
     namespaced: true
   domain: weaviate.io
   group: apps
-  kind: Cluster
+  kind: WeaviateCluster
   version: v1alpha1
 version: "3"

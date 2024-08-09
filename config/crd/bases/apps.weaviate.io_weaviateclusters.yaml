@@ -2,20 +2,20 @@
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
-  name: clusters.apps.weaviate.io
+  name: weaviateclusters.apps.weaviate.io
 spec:
   group: apps.weaviate.io
   names:
-    kind: Cluster
-    listKind: ClusterList
-    plural: clusters
-    singular: cluster
+    kind: WeaviateCluster
+    listKind: WeaviateClusterList
+    plural: weaviateclusters
+    singular: weaviatecluster
   scope: Namespaced
   versions:
   - name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Cluster is the Schema for the clusters API
+        description: WeaviateCluster is the Schema for the weaviateclusters API
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -30,11 +30,11 @@ spec:
           metadata:
             type: object
           spec:
-            description: Spec defines the desired state of Cluster
+            description: Spec defines the desired state of WeaviateCluster
             type: object
             x-kubernetes-preserve-unknown-fields: true
           status:
-            description: Status defines the observed state of Cluster
+            description: Status defines the observed state of WeaviateCluster
             type: object
             x-kubernetes-preserve-unknown-fields: true
         type: object

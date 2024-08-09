@@ -29,14 +29,14 @@ rules:
   - create
 
 ##
-## Rules for apps.weaviate.io/v1alpha1, Kind: Cluster
+## Rules for apps.weaviate.io/v1alpha1, Kind: WeaviateCluster
 ##
 - apiGroups:
   - apps.weaviate.io
   resources:
-  - clusters
-  - clusters/status
-  - clusters/finalizers
+  - weaviateclusters
+  - weaviateclusters/status
+  - weaviateclusters/finalizers
   verbs:
   - create
   - delete

@@ -1,4 +1,4 @@
 ## Append samples of your project ##
 resources:
-- apps_v1alpha1_cluster.yaml
+- apps_v1alpha1_weaviatecluster.yaml
 #+kubebuilder:scaffold:manifestskustomizesamples

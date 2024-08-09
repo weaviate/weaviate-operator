@@ -1,6 +1,6 @@
 # Use the 'create api' subcommand to add watches to this file.
 - group: apps.weaviate.io
   version: v1alpha1
-  kind: Cluster
+  kind: WeaviateCluster
   chart: helm-charts/weaviate
 #+kubebuilder:scaffold:watch
