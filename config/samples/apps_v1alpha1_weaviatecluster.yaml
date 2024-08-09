@@ -1,0 +1,21 @@
+apiVersion: apps.weaviate.io/v1alpha1
+kind: WeaviateCluster
+metadata:
+  name: weaviatecluster-sample
+spec:
+  # Default values copied from <project_dir>/helm-charts/weaviate/values.yaml
+  debug: true
+  env:
+    CLUSTER_DATA_BIND_PORT: 7001
+    CLUSTER_GOSSIP_BIND_PORT: 7000
+    GOGC: 100
+    PROMETHEUS_MONITORING_ENABLED: false
+    PROMETHEUS_MONITORING_GROUP: false
+    QUERY_MAXIMUM_RESULTS: 100000
+    REINDEX_VECTOR_DIMENSIONS_AT_STARTUP: false
+    TRACK_VECTOR_DIMENSIONS: false
+  image:
+    tag: 1.26.1
+  replicas: 3
+  storage:
+    size: 32Gi

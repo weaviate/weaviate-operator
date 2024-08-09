@@ -1,0 +1,23 @@
+# permissions for end users to view weaviateclusters.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/name: weaviate-operator
+    app.kubernetes.io/managed-by: kustomize
+  name: weaviatecluster-viewer-role
+rules:
+- apiGroups:
+  - apps.weaviate.io
+  resources:
+  - weaviateclusters
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - apps.weaviate.io
+  resources:
+  - weaviateclusters/status
+  verbs:
+  - get
