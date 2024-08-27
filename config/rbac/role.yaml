@@ -59,5 +59,17 @@ rules:
   - "apps"
   resources:
   - "statefulsets"
+- apiGroups:
+  - apps
+  resources:
+  - deployments
+  verbs:
+  - get
+  - list
+  - create
+  - update
+  - patch
+  - delete
+  - watch
 
 #+kubebuilder:scaffold:rules
