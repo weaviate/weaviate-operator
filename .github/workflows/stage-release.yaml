@@ -16,10 +16,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      
+
       - name: Generate operator.yaml
         run: make generate-operator-yaml
-        working-directory: weaviate-operator
 
       - name: Create Draft Release
         id: create_release
@@ -30,13 +29,13 @@ jobs:
           tag_name: ${{ github.event.inputs.version }}
           name: Release ${{ github.event.inputs.version }}
           draft: true
-      
+
       - name: Upload Release Artifact
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: weaviate-operator/operator.yaml
+          asset_path: ./operator.yaml
           asset_name: operator.yaml
           asset_content_type: application/yaml
