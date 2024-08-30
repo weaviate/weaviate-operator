@@ -39,7 +39,7 @@ jobs:
 
       - name: Wait for Pods to be Ready
         run: |
-          kubectl wait sts/weaviate -n weaviate --for jsonpath='{.status.readyReplicas}'=${REPLICAS} --timeout=${TIMEOUT}
+          kubectl wait sts/weaviate -n weaviate --for jsonpath='{.status.readyReplicas}'=3 --timeout=300s
           if [ $? -ne 0 ]; then
             kubectl logs -l app=weaviate -n weaviate --all-containers=true --prefix
           fi
