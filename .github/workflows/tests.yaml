@@ -37,6 +37,10 @@ jobs:
       - name: Install CR
         run: kubectl apply -f config/samples/apps_v1alpha1_weaviatecluster.yaml -n weaviate
 
+      - name: Wait for WeaviateCluster to be Initialized
+        run:
+            kubectl wait weaviatecluster/weaviatecluster-sample -n weaviate --for condition=Initialized --timeout=300s;
+        
       - name: Wait for Pods to be Ready
         run: |
           kubectl wait sts/weaviate -n weaviate --for jsonpath='{.status.readyReplicas}'=3 --timeout=300s
