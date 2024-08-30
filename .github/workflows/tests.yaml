@@ -1,0 +1,47 @@
+name: Run Tests
+
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Kind Cluster
+        uses: helm/kind-action@v1
+        with:
+          cluster_name: test-cluster
+                
+      - name: Build the Weaviate Operator image
+        run: make docker-build
+
+      - name: Install Weaviate Operator
+        run: make deploy
+
+      - name: Wait for weaviate-operator-controller-manager to be ready
+        run: |
+          kubectl wait --for=condition=available deployment/weaviate-operator-controller-manager -n weaviate-operator-system --timeout=300s
+          if [ $? -ne 0 ]; then
+            kubectl logs deployment/weaviate-operator-controller-manager -n weaviate-operator-system
+          fi
+
+      - name: Create Weaviate namespace
+        run: kubectl create namespace weaviate
+
+      - name: Install CR
+        run: kubectl apply -f config/samples/apps_v1alpha1_weaviatecluster.yaml -n weaviate
+
+      - name: Wait for Pods to be Ready
+        run: |
+          kubectl wait sts/weaviate -n weaviate --for jsonpath='{.status.readyReplicas}'=${REPLICAS} --timeout=${TIMEOUT}
+          if [ $? -ne 0 ]; then
+            kubectl logs -l app=weaviate -n weaviate --all-containers=true --prefix
+          fi
+    
+      

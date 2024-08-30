@@ -9,7 +9,7 @@ Before getting started, make sure you have the following prerequisites:
 - Have a kubernetes cluster.
 - Ensure that your user is authorized with cluster-admin permissions.
 
-If you want to deploy a local kubernetes cluster for local testing you can install kind:
+If you want to deploy a local kubernetes cluster for local testing you can [install kind](https://kind.sigs.k8s.io/docs/user/quick-start/#installation):
 ```
 brew install kind
 ```
@@ -35,11 +35,11 @@ kind create cluster --wait 120s --name weaviate-k8s --config /tmp/kind-config.ya
 The Weaviate Operator wraps the [weaviate-helm](https://github.com/weaviate/weaviate-helm) Helm charts, creating a CRD and CRs which allow passing specific values to configure the application.
 
 
-## Run the operator
+## Deploy the operator
 
-There are multiple ways to run the operator:
+There are multiple ways to run the `weaviate-operator`:
 
-1. The easiest way is to run the one-command Manifest:
+1. The easiest way is to apply the one-single-command Manifest:
 
 ```shell
 kubectl apply -f https://github.com/weaviate/weaviate-operator/releases/download/0.0.1/operator.yaml
