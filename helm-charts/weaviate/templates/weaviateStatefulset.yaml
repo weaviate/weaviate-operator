@@ -260,7 +260,7 @@ spec:
                 name: weaviate-anthropic
                 key: apiKey
           {{- end  }}
-          {{- if and (index .Values "modules" "generative-mistral" "enabled") (index .Values "modules" "generative-mistral" "apiKey") }}
+          {{- if or (and (index .Values "modules" "text2vec-mistral" "enabled") (index .Values "modules" "text2vec-mistral" "apiKey")) (and (index .Values "modules" "generative-mistral" "enabled") (index .Values "modules" "generative-mistral" "apiKey")) }}
           - name: MISTRAL_APIKEY
             valueFrom:
               secretKeyRef:
@@ -273,6 +273,20 @@ spec:
               secretKeyRef:
                 name: weaviate-octoai
                 key: apiKey
+          {{- end  }}
+          {{- if and (index .Values "modules" "generative-friendliai" "enabled") (index .Values "modules" "generative-friendliai" "token") }}
+          - name: FRIENDLI_TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: weaviate-friendliai
+                key: token
+          {{- end  }}
+          {{- if or (and (index .Values "modules" "text2vec-databricks" "enabled") (index .Values "modules" "text2vec-databricks" "token")) (and (index .Values "modules" "generative-databricks" "enabled") (index .Values "modules" "generative-databricks" "token")) }}
+          - name: DATABRICKS_TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: weaviate-databricks
+                key: token
           {{- end  }}
           {{- if and (index .Values "offload" "s3" "enabled") (index .Values "offload" "s3" "envconfig") }}
             {{- range $key, $value := index .Values "offload" "s3" "envconfig" }}
