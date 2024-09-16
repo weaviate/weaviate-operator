@@ -28,7 +28,7 @@ jobs:
           # Get IMAGE_TAG_BASE from the Makefile
           IMAGE_TAG_BASE=$(sed -n 's/^IMAGE_TAG_BASE ?= //p' Makefile)
           # Name of the kind cluster (modify as needed)
-          KIND_CLUSTER_NAME=weaviate-k8s
+          KIND_CLUSTER_NAME=test-cluster
           # Construct the full image tag
           FULL_IMAGE_TAG="${IMAGE_TAG_BASE}:${VERSION}"
           # Load the docker image into the kind cluster
