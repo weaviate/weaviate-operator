@@ -70,7 +70,7 @@ This will create locally the image `semitechnologies/weaviate-operator`.
 If you have created your cluster via kind, you will have to make that image available inside the cluster:
 
 ```shell
-kind load docker-image semitechnologies/weaviate-operator:0.0.1  --name weaviate-k8s
+kind load docker-image semitechnologies/weaviate-operator:0.0.2  --name weaviate-k8s
 ```
 
 3. [NOT AVAILABLE YET] Deploy the operator with OLM (Operator Lifecycle Manager) in bundle format. First, install OLM using the `operator-sdk olm install` command. Then, bundle your operator, build and push the bundle image, and finally run your bundle using the `operator-sdk run bundle` command.
