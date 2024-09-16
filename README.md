@@ -42,7 +42,7 @@ There are multiple ways to run the `weaviate-operator`:
 1. The easiest way is to apply the one-single-command Manifest:
 
 ```shell
-kubectl apply -f https://github.com/weaviate/weaviate-operator/releases/download/0.0.1/operator.yaml
+kubectl apply -f https://github.com/weaviate/weaviate-operator/releases/download/0.0.2/operator.yaml
 ```
 
 Other alternative ways to install it is:
@@ -161,7 +161,7 @@ kubectl delete weaviatecluster weaviatecluster-sample -n weaviate
 Then, uninstall the operator either using the single-command manifest:
 
 ```shell
-kubectl delete -f https://github.com/weaviate/weaviate-operator/releases/download/0.0.1/operator.yaml
+kubectl delete -f https://github.com/weaviate/weaviate-operator/releases/download/0.0.2/operator.yaml
 ```
 
 or using the repo's Makefile, by running the following command inside the `weaviate-operator` repo:
