@@ -1,3 +1,5 @@
+### NOTE: this is WIP and currently automates no operations besides Helm actions. We plan to convert this codebase to a [Go-based Operator (from the current Helm-based implementation)](https://sdk.operatorframework.io/docs/building-operators/) and do not plan to support an upgrade path.
+
 # Weaviate Operator
 
 The Weaviate Operator is a Kubernetes Operator designed to automate the management of Weaviate Database Clusters.
@@ -171,4 +173,3 @@ make undeploy
 ```
 
 or simply stop the process if you started it via `make install run`.
-
