@@ -1,4 +1,4 @@
-### NOTE: this is WIP and currently automates no operations besides Helm actions. We plan to convert this codebase to a [Go-based Operator (from the current Helm-based implementation)](https://sdk.operatorframework.io/docs/building-operators/) and do not plan to support an upgrade path.
+### 🚧 NOTE: this is WIP and currently automates no operations besides Helm actions. We plan to convert this codebase to a [Go-based Operator (from the current Helm-based implementation)](https://sdk.operatorframework.io/docs/building-operators/) and do not plan to support an upgrade path. 🚧
 
 # Weaviate Operator
 
