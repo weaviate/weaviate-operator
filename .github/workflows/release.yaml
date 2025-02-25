@@ -101,6 +101,14 @@ jobs:
       - name: Generate operator.yaml
         run: make generate-operator-yaml
 
+      # Upload helm-charts as an artifact for the docker-build job
+      - name: Upload Helm charts
+        uses: actions/upload-artifact@v3
+        with:
+          name: helm-charts
+          path: helm-charts/
+          retention-days: 1
+
       # Create a tag for non-draft manual releases
       - name: Create and push tag
         if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.draft == false }}
@@ -154,6 +162,13 @@ jobs:
         uses: actions/checkout@v3
         with:
           ref: ${{ github.ref }}  # Ensure we're using the tagged commit
+      
+      # Download helm-charts artifact from the release job
+      - name: Download Helm charts
+        uses: actions/download-artifact@v3
+        with:
+          name: helm-charts
+          path: helm-charts/
       
       - name: Set version
         id: set_version
