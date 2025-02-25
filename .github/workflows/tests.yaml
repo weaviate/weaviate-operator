@@ -3,7 +3,7 @@ name: Run Tests
 on:
     push:
         branches:
-            - main
+          - main
 
 jobs:
   test:
@@ -11,13 +11,16 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Set up Kind Cluster
         uses: helm/kind-action@v1
         with:
           cluster_name: test-cluster
-                
+          
+      - name: Retrieve latest helm charts
+        run: ./update-helm-chart.sh
+
       - name: Build the Weaviate Operator image
         run: make docker-build
 
