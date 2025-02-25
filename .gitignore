@@ -19,3 +19,9 @@
 
 # Go workspace file
 go.work
+
+# Helm charts directory - downloaded during build
+helm-charts/
+
+# Generated operator.yaml
+operator.yaml

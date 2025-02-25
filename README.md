@@ -44,8 +44,9 @@ There are multiple ways to run the `weaviate-operator`:
 1. The easiest way is to apply the one-single-command Manifest:
 
 ```shell
-kubectl apply -f https://github.com/weaviate/weaviate-operator/releases/download/0.0.2/operator.yaml
+kubectl apply -f https://github.com/weaviate/weaviate-operator/releases/latest/download/operator.yaml
 ```
+
 
 Other alternative ways to install it is:
 
@@ -173,3 +174,55 @@ make undeploy
 ```
 
 or simply stop the process if you started it via `make install run`.
+
+## Development
+
+### Updating the Helm Chart
+
+The operator is based on the [Weaviate Helm Chart](https://github.com/weaviate/weaviate-helm). To update the Helm chart to the latest version, you can use the provided script:
+
+```shell
+./update-helm-chart.sh
+```
+
+To update to a specific version of the Helm chart:
+
+```shell
+./update-helm-chart.sh 1.2.3
+```
+
+After updating the Helm chart, you can generate the operator.yaml:
+
+```shell
+make generate-operator-yaml
+```
+
+### Release Process
+
+The operator uses a single GitHub workflow with sequential jobs for the release process:
+
+1. **Release Job**: Handles creating releases and updating the Helm chart
+   - Updates to the specified Helm chart version
+   - Generates the operator.yaml
+   - Creates a GitHub release with the operator.yaml attached
+   - For non-draft manual releases, creates and pushes a tag
+
+2. **Docker Build Job**: Runs after the Release job completes
+   - Builds and pushes the Docker image with the appropriate version tag
+   - Only runs for non-draft releases
+
+The workflow can be triggered in two ways:
+
+- **Manual Trigger**: Through the GitHub UI
+  - Go to Actions → Weaviate Operator Release → Run workflow
+  - Enter the version number and configure options:
+    - Helm chart version (defaults to latest)
+    - Draft mode (create as draft release)
+
+- **Automatic Trigger**: When a tag is pushed
+  - Create and push a tag: `git tag v1.2.3 && git push origin v1.2.3`
+  - This will create a published release and build the Docker image
+
+#### Note on Helm Chart Updates
+
+The Helm charts directory is excluded from git tracking to avoid committing large changes with each update. The charts are downloaded during the release process.
