@@ -103,7 +103,7 @@ jobs:
 
       # Upload helm-charts as an artifact for the docker-build job
       - name: Upload Helm charts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: helm-charts
           path: helm-charts/
@@ -165,7 +165,7 @@ jobs:
       
       # Download helm-charts artifact from the release job
       - name: Download Helm charts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: helm-charts
           path: helm-charts/
