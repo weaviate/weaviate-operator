@@ -164,7 +164,7 @@ kubectl delete weaviatecluster weaviatecluster-sample -n weaviate
 Then, uninstall the operator either using the single-command manifest:
 
 ```shell
-kubectl delete -f https://github.com/weaviate/weaviate-operator/releases/download/0.0.2/operator.yaml
+kubectl delete -f https://github.com/weaviate/weaviate-operator/releases/latest/download/operator.yaml
 ```
 
 or using the repo's Makefile, by running the following command inside the `weaviate-operator` repo:
