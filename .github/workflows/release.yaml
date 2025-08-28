@@ -36,7 +36,12 @@ jobs:
           if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
             echo "VERSION=${{ github.event.inputs.version }}" >> $GITHUB_OUTPUT
             echo "TAG_NAME=${{ github.event.inputs.version }}" >> $GITHUB_OUTPUT
-            echo "IS_DRAFT=${{ github.event.inputs.draft }}" >> $GITHUB_OUTPUT
+            # Convert string "true"/"false" to actual boolean for the release action
+            if [[ "${{ github.event.inputs.draft }}" == "true" ]]; then
+              echo "IS_DRAFT=true" >> $GITHUB_OUTPUT
+            else
+              echo "IS_DRAFT=false" >> $GITHUB_OUTPUT
+            fi
           else
             VERSION=${GITHUB_REF#refs/tags/v}
             echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
@@ -111,7 +116,7 @@ jobs:
 
       # Create a tag for non-draft manual releases
       - name: Create and push tag
-        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.draft == false }}
+        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.draft != 'true' }}
         run: |
           git config --global user.name "GitHub Actions Bot"
           git config --global user.email "actions@github.com"
@@ -152,7 +157,7 @@ jobs:
   # Only run the Docker build job for non-draft releases
   docker-build:
     needs: release
-    if: ${{ github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && github.event.inputs.draft == false) }}
+    if: ${{ github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && github.event.inputs.draft != 'true') }}
     runs-on: ubuntu-latest
     permissions:
       packages: write
